@@ -8,6 +8,7 @@ from random import randint
 
 the_cards = []
 card_is_used = []
+test = []
 
 for i in range(1, 54):
     the_cards.append(i)
