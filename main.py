@@ -8,23 +8,41 @@ from random import randint
 
 the_cards = []
 card_is_used = []
-test = []
+all_possible_hands = []
+a_hand = []
 
 for i in range(1, 54):
     the_cards.append(i)
     card_is_used.append(False)
 
-def deal():
-    a_hand = []
+for i in range(1, 54):
+    the_cards.append(i)
+    card_is_used.append(False)
+
+
+def deal(the_hand):
+    for i in range(1, 54):
+        card_is_used[i] = False
+
     for _ in range(5):
         a_card = randint(1,52)
-        print(a_card)
         while card_is_used[a_card]:
             a_card = randint(1,52)
-            print(a_card)
-        a_hand.append(a_card)
+            print("Card is used - pick another.")
+        the_hand.append(a_card)
         card_is_used[a_card] = True
-    return a_hand
+    # print(sorted(the_hand))
+    return sorted(the_hand)
+
+def all_hands_lister():
+    for i in range(300):
+        a_hand = []
+        one_hand = deal(a_hand)
+        if one_hand not in all_possible_hands:
+            all_possible_hands.append("xxx")
+            all_possible_hands[i] = deal(a_hand)
+    # print(deal(one_hand))
+    return all_possible_hands
 
 
 #  1-13 are spades A-K
@@ -98,26 +116,32 @@ def probability(the_hand):
         return 0
 
 
-print(combination(52, 5))
-print("%.8f" % probability("royal flush"))
-print("%.8f" % probability("straight flush"))
-print("%.8f" % probability("4OAK"))
-print("%.8f" % probability("full house"))
-print("%.8f" % probability("flush"))
-print("%.8f" % probability("straight"))
-print("%.8f" % probability("3OAK"))
-print("%.8f" % probability("two pair"))
-print("%.8f" % probability("one pair"))
-print("%.8f" % probability("high card"))
+# print(combination(52, 5))
+# print("%.8f" % probability("royal flush"))
+# print("%.8f" % probability("straight flush"))
+# print("%.8f" % probability("4OAK"))
+# print("%.8f" % probability("full house"))
+# print("%.8f" % probability("flush"))
+# print("%.8f" % probability("straight"))
+# print("%.8f" % probability("3OAK"))
+# print("%.8f" % probability("two pair"))
+# print("%.8f" % probability("one pair"))
+# print("%.8f" % probability("high card"))
 
 
-id = 25
-print(find_card_value(id) + " of " + find_card_face(id))
+# id = 25
+# print(find_card_value(id) + " of " + find_card_face(id))
 
-print(deal())
 
-my_hand = deal()
+my_hand = deal(a_hand)
+print(my_hand)
 
 for item in range(5):
     print(find_card_value(my_hand[item]) + " of " + find_card_face(my_hand[item]))
 
+print("\n")
+
+all_possible_hands = all_hands_lister()
+
+for i in range(0, len(all_possible_hands)):
+    print(all_possible_hands[i])
