@@ -73,7 +73,7 @@ def is_it_2_pair(this_hand):
         return False
 
 
-def is_it_2_of_a_kind(this_hand):
+def is_it_a_pair(this_hand):
     """test for a pair"""
     count_of_0 = count_values(this_hand, (this_hand[0]))
     count_of_1 = count_values(this_hand, (this_hand[1]))
@@ -114,6 +114,26 @@ def is_it_4_of_a_kind(this_hand):
     else:
         return False
 
+def keep_the_hand(the_hand):
+    """add the hand to the possible list if it is at least 2 pair"""
+    if is_it_royal(the_hand) and is_it_a_flush(the_hand):
+        return True
+    if is_it_a_straight(the_hand) and is_it_a_flush(the_hand):
+        return True
+    if is_it_4_of_a_kind(the_hand):
+        return True
+    if is_it_a_full_house(the_hand):
+        return True
+    if is_it_a_flush(the_hand):
+        return True
+    if is_it_a_straight(the_hand):
+        return True
+    if is_it_3_of_a_kind(the_hand):
+        return True
+    if is_it_2_pair(the_hand):
+        return True
+    return False
+
 
 def rate_the_hand(the_hand):
     """hand rating"""
@@ -133,8 +153,8 @@ def rate_the_hand(the_hand):
         return "Three of a kind"
     if is_it_2_pair(the_hand):
         return "Two Pair"
-    if is_it_2_of_a_kind(the_hand):
-        return "Two of a kind"
+    if is_it_a_pair(the_hand):
+        return "You have 1 pair"
 
     values = []
 
