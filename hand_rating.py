@@ -1,5 +1,9 @@
-from card_utilities import *
-
+#from probability_calcs import *
+from card_utilities import find_card_value_int, find_card_face_string, find_card_suit, count_values
+# the_cards = []
+# card_is_used = []
+# all_possible_hands = []
+# a_hand = []
 
 def is_it_a_straight(this_hand):
     """test for straight"""
@@ -135,9 +139,14 @@ def keep_the_hand(the_hand):
     return False
 
 
+def is_it_royal_flush(this_hand):
+    if is_it_royal(this_hand) and is_it_a_flush(this_hand):
+        return True
+    return False
+
 def rate_the_hand(the_hand):
     """hand rating"""
-    if is_it_royal(the_hand) and is_it_a_flush(the_hand):
+    if is_it_royal_flush(the_hand):
         return "royal flush"
     if is_it_a_straight(the_hand) and is_it_a_flush(the_hand):
         return "straight flush"

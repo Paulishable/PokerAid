@@ -1,14 +1,10 @@
 from random import randint
 
-
 the_cards = []
 card_is_used = []
 all_possible_hands = []
 a_hand = []
 
-for index in range(1, 54):
-    the_cards.append(index)
-    card_is_used.append(False)
 
 for index in range(1, 54):
     the_cards.append(index)
@@ -21,24 +17,6 @@ def count_values(this_hand, a_card):
         if find_card_value_int(ele) == find_card_value_int(a_card):
             count = count + 1
     return count
-
-
-
-def deal(the_hand):
-    """deal the hand"""
-    the_hand = []
-    for i in range(1, 54):
-        card_is_used[i] = False
-
-    for _ in range(5):
-        a_card = randint(1, 52)
-        while card_is_used[a_card]:
-            a_card = randint(1, 52)
-            # print("Card is used - pick another.")
-        the_hand.append(a_card)
-        card_is_used[a_card] = True
-    # print(sorted(the_hand))
-    return sorted(the_hand)
 
 
 #  1-13 are spades A-K
