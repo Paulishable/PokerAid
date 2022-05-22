@@ -9,6 +9,7 @@ the_cards = []
 all_possible_hands = []
 a_hand = []
 hash_list = []
+the_hand = []
 
 
 def deal(the_hand):
@@ -126,10 +127,10 @@ def readin_all_hands():
 
 
 ###################################################
-the_hand = []
-my_hand = deal(the_hand)
-print_and_rate_it(my_hand)
-print("\n\n\n")
+# the_hand = []
+# my_hand = deal(the_hand)
+# print_and_rate_it(my_hand)
+# print("\n\n\n")
 
 
 def discard_one(card_number):
@@ -173,16 +174,65 @@ def discard_one(card_number):
             if is_it_a_pair(my_new_hand):
                 high_card_count += 1
 
-discard_one(0)
-print(f"high_card probability = ", "%.2f" % (high_card_count/47*100), "%")
-print(f"two_pair  probability = ", "%.2f" % (two_pair_count/47*100), "%")
-print(f"three_OAK probability = ", "%.2f" % (three_OAK_count/47*100), "%")
-print(f"straight probability = ", "%.2f" % (straight_count/47*100), "%")
-print(f"flush probability = ", "%.2f" % (flush_count/47*100), "%")
-print(f"full_house probability = ", "%.2f" % (full_house_count/47*100), "%")
-print(f"four_OAK probability = ", "%.2f" % (four_OAK_count/47*100), "%")
-print(f"straight_flush probability = ", "%.2f" % (straight_flush_count/47*100), "%")
-print(f"royal_flush probability = ", "%.2f" % (royal_flush_count/47*100), "%")
-
-
+# discard_one(0)
+# print("getting rid of first card:\n")
+# print(f"high_card probability = ", "%.2f" % (high_card_count/47*100), "%")
+# print(f"two_pair  probability = ", "%.2f" % (two_pair_count/47*100), "%")
+# print(f"three_OAK probability = ", "%.2f" % (three_OAK_count/47*100), "%")
+# print(f"straight probability = ", "%.2f" % (straight_count/47*100), "%")
+# print(f"flush probability = ", "%.2f" % (flush_count/47*100), "%")
+# print(f"full_house probability = ", "%.2f" % (full_house_count/47*100), "%")
+# print(f"four_OAK probability = ", "%.2f" % (four_OAK_count/47*100), "%")
+# print(f"straight_flush probability = ", "%.2f" % (straight_flush_count/47*100), "%")
+# print(f"royal_flush probability = ", "%.2f" % (royal_flush_count/47*100), "%")
+#
+# discard_one(1)
+# print("getting rid of second card:\n")
+# print(f"high_card probability = ", "%.2f" % (high_card_count/47*100), "%")
+# print(f"two_pair  probability = ", "%.2f" % (two_pair_count/47*100), "%")
+# print(f"three_OAK probability = ", "%.2f" % (three_OAK_count/47*100), "%")
+# print(f"straight probability = ", "%.2f" % (straight_count/47*100), "%")
+# print(f"flush probability = ", "%.2f" % (flush_count/47*100), "%")
+# print(f"full_house probability = ", "%.2f" % (full_house_count/47*100), "%")
+# print(f"four_OAK probability = ", "%.2f" % (four_OAK_count/47*100), "%")
+# print(f"straight_flush probability = ", "%.2f" % (straight_flush_count/47*100), "%")
+# print(f"royal_flush probability = ", "%.2f" % (royal_flush_count/47*100), "%")
+#
+# discard_one(2)
+# print("getting rid of third card:\n")
+# print(f"high_card probability = ", "%.2f" % (high_card_count/47*100), "%")
+# print(f"two_pair  probability = ", "%.2f" % (two_pair_count/47*100), "%")
+# print(f"three_OAK probability = ", "%.2f" % (three_OAK_count/47*100), "%")
+# print(f"straight probability = ", "%.2f" % (straight_count/47*100), "%")
+# print(f"flush probability = ", "%.2f" % (flush_count/47*100), "%")
+# print(f"full_house probability = ", "%.2f" % (full_house_count/47*100), "%")
+# print(f"four_OAK probability = ", "%.2f" % (four_OAK_count/47*100), "%")
+# print(f"straight_flush probability = ", "%.2f" % (straight_flush_count/47*100), "%")
+# print(f"royal_flush probability = ", "%.2f" % (royal_flush_count/47*100), "%")
+#
+# discard_one(3)
+# print("getting rid of fourth card:\n")
+# print(f"high_card probability = ", "%.2f" % (high_card_count/47*100), "%")
+# print(f"two_pair  probability = ", "%.2f" % (two_pair_count/47*100), "%")
+# print(f"three_OAK probability = ", "%.2f" % (three_OAK_count/47*100), "%")
+# print(f"straight probability = ", "%.2f" % (straight_count/47*100), "%")
+# print(f"flush probability = ", "%.2f" % (flush_count/47*100), "%")
+# print(f"full_house probability = ", "%.2f" % (full_house_count/47*100), "%")
+# print(f"four_OAK probability = ", "%.2f" % (four_OAK_count/47*100), "%")
+# print(f"straight_flush probability = ", "%.2f" % (straight_flush_count/47*100), "%")
+# print(f"royal_flush probability = ", "%.2f" % (royal_flush_count/47*100), "%")
+#
+# discard_one(4)
+# print("getting rid of fifth card:\n")
+# print(f"high_card probability = ", "%.2f" % (high_card_count/47*100), "%")
+# print(f"two_pair  probability = ", "%.2f" % (two_pair_count/47*100), "%")
+# print(f"three_OAK probability = ", "%.2f" % (three_OAK_count/47*100), "%")
+# print(f"straight probability = ", "%.2f" % (straight_count/47*100), "%")
+# print(f"flush probability = ", "%.2f" % (flush_count/47*100), "%")
+# print(f"full_house probability = ", "%.2f" % (full_house_count/47*100), "%")
+# print(f"four_OAK probability = ", "%.2f" % (four_OAK_count/47*100), "%")
+# print(f"straight_flush probability = ", "%.2f" % (straight_flush_count/47*100), "%")
+# print(f"royal_flush probability = ", "%.2f" % (royal_flush_count/47*100), "%")
+#
+#
 
