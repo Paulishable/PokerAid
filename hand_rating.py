@@ -1,9 +1,4 @@
-#from probability_calcs import *
 from card_utilities import find_card_value_int, find_card_face_string, find_card_suit, count_values
-# the_cards = []
-# card_is_used = []
-# all_possible_hands = []
-# a_hand = []
 
 def is_it_a_straight(this_hand):
     """test for straight"""
