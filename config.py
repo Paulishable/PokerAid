@@ -22,7 +22,7 @@ TWO_PAIR = 7
 ONE_PAIR = 8
 HIGH_CARD = 9
 
-list_of_hand_probs[ROYAL_FLUSH] = "12 in 649739.00"
+list_of_hand_probs[ROYAL_FLUSH] = "1 in 649739.00"
 list_of_hand_probs[STRAIGHT_FLUSH] = "1 in 72192.33"
 list_of_hand_probs[FOUR_OAK] = "1 in 4164.00"
 list_of_hand_probs[FULL_HOUSE] = "1 in 693.17"

@@ -46,27 +46,32 @@ def discard_one(card_number):
         list_of_hand_counts[i] = 0
 
     my_new_hand = my_hand.copy()
+    my_new_hand = sorted(my_new_hand)
+    #print(f"my new hand from discard one is {my_new_hand} and we're changing number {card_number}")
 
     for card in range(1, 53):
-        if card not in my_hand:
+        if card not in my_new_hand:
+            #my_new_hand = my_hand.copy()
             my_new_hand[card_number] = card
-            if is_it_royal_flush(my_new_hand):
+            #my_new_hand = sorted(my_new_hand)
+            #print(f"My new hand from discard one: {my_new_hand}")
+            if is_it_royal_flush(sorted(my_new_hand)):
                 list_of_hand_counts[ROYAL_FLUSH] = + 1
-            if is_it_a_straight(my_new_hand) and is_it_a_flush(my_new_hand):
+            if is_it_a_straight(sorted(my_new_hand)) and is_it_a_flush(sorted(my_new_hand)):
                 list_of_hand_counts[STRAIGHT_FLUSH] += 1
-            if is_it_4_of_a_kind(my_new_hand):
+            if is_it_4_of_a_kind(sorted(my_new_hand)):
                 list_of_hand_counts[FOUR_OAK] += 1
-            if is_it_a_full_house(my_new_hand):
+            if is_it_a_full_house(sorted(my_new_hand)):
                 list_of_hand_counts[FULL_HOUSE] += 1
-            if is_it_a_flush(my_new_hand):
+            if is_it_a_flush(sorted(my_new_hand)):
                 list_of_hand_counts[FLUSH] += 1
-            if is_it_a_straight(my_new_hand):
+            if is_it_a_straight(sorted(my_new_hand)):
                 list_of_hand_counts[STRAIGHT] += 1
-            if is_it_3_of_a_kind(my_new_hand):
+            if is_it_3_of_a_kind(sorted(my_new_hand)):
                 list_of_hand_counts[THREE_OAK] += 1
-            if is_it_2_pair(my_new_hand):
+            if is_it_2_pair(sorted(my_new_hand)):
                 list_of_hand_counts[TWO_PAIR] += 1
-            if is_it_a_pair(my_new_hand):
+            if is_it_a_pair(sorted(my_new_hand)):
                 list_of_hand_counts[ONE_PAIR] += 1
 
     list_of_hand_probs[ROYAL_FLUSH] = "Royal Flush = {0:.2f}%".format(list_of_hand_counts[ROYAL_FLUSH] / 47 * 100)

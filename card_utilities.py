@@ -5,10 +5,10 @@ card_is_used = []
 all_possible_hands = []
 a_hand = []
 
-
 for index in range(1, 54):
     the_cards.append(index)
     card_is_used.append(False)
+
 
 def count_values(this_hand, a_card):
     """looking for two, three, four of a kind"""
@@ -77,4 +77,3 @@ def find_card_suit(card_id):
     if 39 < card_id < 53:  # clubs
         return "clubs"
     return "ERROR"
-

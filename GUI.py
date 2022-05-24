@@ -15,10 +15,10 @@ from button_functions import discard_one, quit_action, help_action, deal, check_
 from config import comic_sans_20, comic_sans_10, helvetica_20, list_of_hand_probs, my_hand
 from config import ROYAL_FLUSH, STRAIGHT_FLUSH, FOUR_OAK, THREE_OAK, FULL_HOUSE, STRAIGHT, FLUSH, TWO_PAIR, ONE_PAIR
 
-WIDTH = 1100
-HEIGHT = 600
-XPLACEMENT = 400
-YPLACEMENT = 50
+WIDTH = 1010
+HEIGHT = 550
+XPLACEMENT = 5
+YPLACEMENT = 5
 
 root = Tk()
 
