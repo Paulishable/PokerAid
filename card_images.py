@@ -61,7 +61,7 @@ def load_images():
     card_images.append(PhotoImage(file="cards/queen_of_diamonds.png"))
     card_images.append(PhotoImage(file="cards/king_of_diamonds.png"))
 
-    card_images.append(PhotoImage(file="cards/ace_of_spades.png"))
+    card_images.append(PhotoImage(file="cards/ace_of_clubs.png"))
     card_images.append(PhotoImage(file="cards/2_of_clubs.png"))
     card_images.append(PhotoImage(file="cards/3_of_clubs.png"))
     card_images.append(PhotoImage(file="cards/4_of_clubs.png"))
