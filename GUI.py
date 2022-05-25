@@ -14,11 +14,12 @@ from config import list_of_hand_counts
 from button_functions import discard_one, quit_action, help_action, deal, check_the_currently_dealt_hand
 from config import comic_sans_20, comic_sans_10, helvetica_20, list_of_hand_probs, my_hand
 from config import ROYAL_FLUSH, STRAIGHT_FLUSH, FOUR_OAK, THREE_OAK, FULL_HOUSE, STRAIGHT, FLUSH, TWO_PAIR, ONE_PAIR
+from config import discard_card_0, discard_card_1, discard_card_2, discard_card_3, discard_card_4
 
-WIDTH = 1010
-HEIGHT = 550
-XPLACEMENT = 5
-YPLACEMENT = 5
+WIDTH = 1220
+HEIGHT = 600
+XPLACEMENT = 50
+YPLACEMENT = 50
 
 root = Tk()
 
@@ -30,6 +31,36 @@ main_frame = Frame(root, bd=5, bg="#264d00")
 main_frame.place(relx=0, rely=0, relwidth=1, relheight=1)
 
 load_images()
+
+
+def find_pressed_buttons():
+    i_count = 0
+    this_card = -1
+
+    if discard_card_0:
+        i_count += 1
+        this_card = 0
+
+    if discard_card_1:
+        i_count += 1
+        this_card = 1
+
+    if discard_card_2:
+        i_count += 1
+        this_card = 2
+
+    if discard_card_3:
+        i_count += 1
+        this_card = 3
+
+    if discard_card_4:
+        i_count += 1
+        this_card = 4
+
+    if i_count == 1:
+        discard_one(this_card)
+
+    update_sccore_sheet()
 
 
 def start_by_dealing():
@@ -48,6 +79,23 @@ def start_by_dealing():
     feedback_text.__setitem__("text", rate_the_hand(my_hand))
     check_the_currently_dealt_hand()
     update_sccore_sheet()
+    card_0.state(['!pressed'])
+    card_1.state(['!pressed'])
+    card_2.state(['!pressed'])
+    card_3.state(['!pressed'])
+    card_4.state(['!pressed'])
+
+    global discard_card_0
+    global discard_card_1
+    global discard_card_2
+    global discard_card_3
+    global discard_card_4
+
+    discard_card_0 = False
+    discard_card_1 = False
+    discard_card_2 = False
+    discard_card_3 = False
+    discard_card_4 = False
 
     return my_hand
 
@@ -56,19 +104,27 @@ def start_by_dealing():
 
 help_btn_style = ttk.Style()
 help_btn_style.theme_use('classic')
-help_btn_style.configure('HB.TButton', backgroun='gray71', foreground='black', width=20,
+help_btn_style.configure('HB.TButton', backgroun='gray71', foreground='#006600', width=25,
                          borderwidth=1,
                          focusthickness=3,
-                         focuscolor='green', font=comic_sans_10, wraplength=100)
-help_btn_style.map('HB.TButton', background=[('active', 'gray71')])
+                         focuscolor='green', font=helvetica_20, wraplength=100)
+help_btn_style.map('HB.TButton', background=[('active', '#006600')], foreground=[('active', 'black')])
 
 quit_btn_style = ttk.Style()
 quit_btn_style.theme_use('classic')
-quit_btn_style.configure('QB.TButton', backgroun='#e6f2ff', foreground='black', width=20,
+quit_btn_style.configure('QB.TButton', backgroun='gray71', foreground='#ff3300', width=25,
                          borderwidth=1,
                          focusthickness=3,
-                         focuscolor='green', font=comic_sans_10, wraplength=100)
-quit_btn_style.map('QB.TButton', background=[('active', 'red')])
+                         focuscolor='green', font=helvetica_20, wraplength=100)
+quit_btn_style.map('QB.TButton', background=[('active', '#ff3300')], foreground=[('active', 'black')])
+
+calc_btn_style = ttk.Style()
+calc_btn_style.theme_use('classic')
+calc_btn_style.configure('CALC.TButton', background='gray71', foreground='#006600', width=55,
+                         borderwidth=1,
+                         focusthickness=3,
+                         focuscolor='green', font=helvetica_20, wraplength=1000)
+calc_btn_style.map('CALC.TButton', background=[('active', '#006600')], foreground=[('active', 'black')])
 
 # -----------------------------------HEADER FRAME-----------------------------------------------------------------
 
@@ -121,10 +177,10 @@ one_pair_score = Label(score_frame, text="One Pair = " + list_of_hand_probs[ONE_
                        font=comic_sans_20, bg='gray71')
 one_pair_score.place(relx=.05, rely=.85, relwidth=.9, relheight=.1, anchor=NW)
 
-# ----------------------------------------------------------------------------------------------------------------------
+# ---------------------------------FEEDBACK, HELP AND QUIT BUTTONS-----------------------------------------------------
 
 feedback_frame = LabelFrame(font=comic_sans_20, bg='gray71', bd=5, relief=RAISED)
-feedback_frame.place(relx=.025, rely=.7, relwidth=.6, relheight=.1, anchor=NW)
+feedback_frame.place(relx=.025, rely=.635, relwidth=.6, relheight=.165, anchor=NW)
 
 feedback_text = Label(feedback_frame, text=f"^Click on your choice.^", bg='gray71', anchor='center', width=10,
                       font=comic_sans_20)
@@ -132,53 +188,56 @@ feedback_text = Label(feedback_frame, text=f"^Click on your choice.^", bg='gray7
 feedback_text.place(relx=.5, rely=.05, relwidth=.8, relheight=.9, anchor=N)
 
 help_button_frame = LabelFrame(font=comic_sans_20, bg='gray71', bd=5, relief=RAISED)
-help_button_frame.place(relx=.225, rely=.82, relwidth=.1, relheight=.1, anchor=NW)
+help_button_frame.place(relx=.14, rely=.82, relwidth=.1, relheight=.1, anchor=NW)
 help_button = ttk.Button(help_button_frame, text="HELP", command=help_action, style='HB.TButton')
-help_button.place(relx=.05, rely=.0, relwidth=.9, relheight=.95, anchor=NW)
+help_button.place(relx=.0, rely=.0, relwidth=1.0, relheight=.95, anchor=NW)
 
 deal_button_frame = LabelFrame(font=comic_sans_20, bg='gray71', bd=5, relief=RAISED)
-deal_button_frame.place(relx=.9, rely=.82, relwidth=.1, relheight=.1, anchor=NE)
+deal_button_frame.place(relx=.65, rely=.82, relwidth=.33, relheight=.1, anchor=NW)
 deal_button = ttk.Button(deal_button_frame, text="DEAL", command=lambda: start_by_dealing(), style='HB.TButton')
-deal_button.place(relx=.05, rely=.0, relwidth=.9, relheight=.95, anchor=NW)
+deal_button.place(relx=.0, rely=.0, relwidth=1.0, relheight=.95, anchor=NW)
 
 quit_button_frame = LabelFrame(font=comic_sans_20, bg='gray71', bd=5, relief=RAISED)
-quit_button_frame.place(relx=.1, rely=.82, relwidth=.1, relheight=.1, anchor=NW)
-quit_button = ttk.Button(quit_button_frame, text="QUIT", command=quit_action, style='HB.TButton')
+quit_button_frame.place(relx=.025, rely=.82, relwidth=.1, relheight=.1, anchor=NW)
+quit_button = ttk.Button(quit_button_frame, text="QUIT", command=quit_action, style='QB.TButton')
 quit_button.place(relx=.05, rely=0, relwidth=.9, relheight=.95, anchor=NW)
 
+calculate_button_frame = LabelFrame(font=comic_sans_10, bg='gray71', bd=5, relief=RAISED)
+calculate_button_frame.place(relx=.25, rely=.82, relwidth=.375, relheight=.1, anchor=NW)
+calculate_button = ttk.Button(calculate_button_frame, text="CALCULATE", command=find_pressed_buttons,
+                              style='CALC.TButton')
+calculate_button.place(relx=.5, rely=0, relwidth=1.0, relheight=.95, anchor=N)
+
+
+# ---------------------------------CARD BUTTONS AND CHOICES-----------------------------------------------------
 
 def choice_made(the_choice):
-    global letter
+    global discard_card_0
+    global discard_card_1
+    global discard_card_2
+    global discard_card_3
+    global discard_card_4
     if the_choice == "A":
-        letter = "A"
         feedback_text.__setitem__("text", "Discarding " + card_0["text"])
-        discard_one(0)
-        update_sccore_sheet()
+        discard_card_0 = True
     elif the_choice == "B":
-        letter = "B"
         feedback_text.__setitem__("text", "Discarding " + card_1["text"])
-        discard_one(1)
-        update_sccore_sheet()
+        discard_card_1 = True
     elif the_choice == "C":
-        letter = "C"
         feedback_text.__setitem__("text", "Discarding " + card_2["text"])
-        discard_one(2)
-        update_sccore_sheet()
+        discard_card_2 = True
     elif the_choice == "D":
-        letter = "D"
         feedback_text.__setitem__("text", "Discarding " + card_3["text"])
-        discard_one(3)
-        update_sccore_sheet()
+        discard_card_3 = True
     elif the_choice == "E":
-        letter = "E"
         feedback_text.__setitem__("text", "Discarding " + card_4["text"])
-        discard_one(4)
-        update_sccore_sheet()
+        discard_card_4 = True
 
 
 def update_sccore_sheet():
     list_of_hand_probs[ROYAL_FLUSH] = "Royal Flush = {0:.2f}%".format(list_of_hand_counts[ROYAL_FLUSH] / 47 * 100)
-    list_of_hand_probs[STRAIGHT_FLUSH] = "Straight Flush = {0:.2f}%".format(list_of_hand_counts[STRAIGHT_FLUSH] / 47 * 100)
+    list_of_hand_probs[STRAIGHT_FLUSH] = "Straight Flush = {0:.2f}%".format(
+        list_of_hand_counts[STRAIGHT_FLUSH] / 47 * 100)
     list_of_hand_probs[FOUR_OAK] = "Four of a Kind = {0:.2f}%".format(list_of_hand_counts[FOUR_OAK] / 47 * 100)
     list_of_hand_probs[FULL_HOUSE] = "Full House = {0:.2f}%".format(list_of_hand_counts[FULL_HOUSE] / 47 * 100)
     list_of_hand_probs[FLUSH] = "Flush = {0:.2f}%".format(list_of_hand_counts[FLUSH] / 47 * 100)
@@ -203,10 +262,10 @@ card_frame.place(relx=.025, rely=.28, relwidth=.6, relheight=.32, anchor=NW)
 
 card_btn_style = ttk.Style()
 card_btn_style.theme_use('classic')
-card_btn_style.configure('CB.TButton', backgroun='#e6f2ff', foreground='black', borderwidth=1,
+card_btn_style.configure('CB.TButton', background='#e6f2ff', foreground='black', borderwidth=8,
                          focusthickness=5,
-                         focuscolor='gray', font=comic_sans_20, wraplength=100)
-card_btn_style.map('CB.TButton', background=[('active', 'gray71')])
+                         focuscolor='gray', font=comic_sans_20, wraplength=100, relief=RAISED)
+card_btn_style.map('CB.TButton', background=[('active', '#006600')])
 
 card_0 = ttk.Button(card_frame, text=str(find_card_face_string(my_hand[0])) + " of " + find_card_suit(my_hand[0]),
                     image=card_images[my_hand[0]], command=lambda: choice_made("A"), style='CB.TButton')
@@ -219,10 +278,10 @@ card_3 = ttk.Button(card_frame, text=str(find_card_face_string(my_hand[3])) + " 
 card_4 = ttk.Button(card_frame, text=str(find_card_face_string(my_hand[4])) + " of " + find_card_suit(my_hand[4]),
                     image=card_images[my_hand[4]], command=lambda: choice_made("E"), style='CB.TButton')
 
-card_0.place(relx=.0, rely=.01, relwidth=.2, relheight=.98, anchor=NW)
-card_1.place(relx=.2, rely=.01, relwidth=.2, relheight=.98, anchor=NW)
-card_2.place(relx=.4, rely=.01, relwidth=.2, relheight=.98, anchor=NW)
-card_3.place(relx=.6, rely=.01, relwidth=.2, relheight=.98, anchor=NW)
-card_4.place(relx=.8, rely=.01, relwidth=.2, relheight=.98, anchor=NW)
+card_0.place(relx=.1, rely=.5, relwidth=.2, relheight=.98, anchor=CENTER)
+card_1.place(relx=.3, rely=.5, relwidth=.2, relheight=.98, anchor=CENTER)
+card_2.place(relx=.5, rely=.5, relwidth=.2, relheight=.98, anchor=CENTER)
+card_3.place(relx=.7, rely=.5, relwidth=.2, relheight=.98, anchor=CENTER)
+card_4.place(relx=.9, rely=.5, relwidth=.2, relheight=.98, anchor=CENTER)
 
 root.mainloop()

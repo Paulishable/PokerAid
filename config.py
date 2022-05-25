@@ -44,6 +44,11 @@ list_of_hand_counts[TWO_PAIR] = 0
 list_of_hand_counts[ONE_PAIR] = 0
 list_of_hand_counts[HIGH_CARD] = 0
 
+discard_card_0 = False
+discard_card_1 = False
+discard_card_2 = False
+discard_card_3 = False
+discard_card_4 = False
 
 
 

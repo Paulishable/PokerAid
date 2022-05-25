@@ -79,7 +79,6 @@ def is_it_a_pair(this_hand):
     count_of_2 = count_values(this_hand, (this_hand[2]))
     count_of_3 = count_values(this_hand, (this_hand[3]))
     count_of_4 = count_values(this_hand, (this_hand[4]))
-    half_way = False
     if count_of_0 + count_of_1 + count_of_2 + count_of_3 + count_of_4 == 7:
         return True
     else:
@@ -93,8 +92,8 @@ def is_it_3_of_a_kind(this_hand):
     count_of_2 = count_values(this_hand, (this_hand[2]))
     count_of_3 = count_values(this_hand, (this_hand[3]))
     count_of_4 = count_values(this_hand, (this_hand[4]))
-    half_way = False
-    if count_of_0 + count_of_1 + count_of_2 + count_of_3 + count_of_4 == 11:
+    total = count_of_0 + count_of_1 + count_of_2 + count_of_3 + count_of_4
+    if total in [11, 13]:
         return True
     else:
         return False
