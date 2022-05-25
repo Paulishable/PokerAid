@@ -4,6 +4,8 @@ from tkinter import ttk
 card_images = []
 list_of_hand_probs = [0] * 10
 list_of_hand_counts = [0] * 10
+list_of_hand_counts = [0] * 10
+discards = [False] * 5
 
 helvetica_20 = ("Helvetica", 20, "bold")
 comic_sans_20 = ("Comic Sans MS", 20, "bold")
@@ -44,11 +46,6 @@ list_of_hand_counts[TWO_PAIR] = 0
 list_of_hand_counts[ONE_PAIR] = 0
 list_of_hand_counts[HIGH_CARD] = 0
 
-discard_card_0 = False
-discard_card_1 = False
-discard_card_2 = False
-discard_card_3 = False
-discard_card_4 = False
 
 
 

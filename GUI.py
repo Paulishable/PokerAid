@@ -14,7 +14,7 @@ from config import list_of_hand_counts
 from button_functions import discard_one, quit_action, help_action, deal, check_the_currently_dealt_hand
 from config import comic_sans_20, comic_sans_10, helvetica_20, list_of_hand_probs, my_hand
 from config import ROYAL_FLUSH, STRAIGHT_FLUSH, FOUR_OAK, THREE_OAK, FULL_HOUSE, STRAIGHT, FLUSH, TWO_PAIR, ONE_PAIR
-from config import discard_card_0, discard_card_1, discard_card_2, discard_card_3, discard_card_4
+from config import discards
 
 WIDTH = 1220
 HEIGHT = 600
@@ -33,32 +33,22 @@ main_frame.place(relx=0, rely=0, relwidth=1, relheight=1)
 load_images()
 
 
+def count_discards():
+    """looking for two, three, four of a kind"""
+    count = 0
+    for ele in discards:
+        if ele:
+            count = count + 1
+    return count
+
+
 def find_pressed_buttons():
-    i_count = 0
-    this_card = -1
-
-    if discard_card_0:
-        i_count += 1
-        this_card = 0
-
-    if discard_card_1:
-        i_count += 1
-        this_card = 1
-
-    if discard_card_2:
-        i_count += 1
-        this_card = 2
-
-    if discard_card_3:
-        i_count += 1
-        this_card = 3
-
-    if discard_card_4:
-        i_count += 1
-        this_card = 4
+    i_count = count_discards()
 
     if i_count == 1:
-        discard_one(this_card)
+        for i in range(len(discards)):
+            if discards[i]:
+                discard_one(i)
 
     update_sccore_sheet()
 
@@ -85,17 +75,14 @@ def start_by_dealing():
     card_3.state(['!pressed'])
     card_4.state(['!pressed'])
 
-    global discard_card_0
-    global discard_card_1
-    global discard_card_2
-    global discard_card_3
-    global discard_card_4
+    discard_0.config(text="")
+    discard_1.config(text="")
+    discard_2.config(text="")
+    discard_3.config(text="")
+    discard_4.config(text="")
 
-    discard_card_0 = False
-    discard_card_1 = False
-    discard_card_2 = False
-    discard_card_3 = False
-    discard_card_4 = False
+    for i in range(5):
+        discards[i] = False
 
     return my_hand
 
@@ -179,8 +166,27 @@ one_pair_score.place(relx=.05, rely=.85, relwidth=.9, relheight=.1, anchor=NW)
 
 # ---------------------------------FEEDBACK, HELP AND QUIT BUTTONS-----------------------------------------------------
 
+discard_frame = LabelFrame(font=comic_sans_20, bg='gray71', bd=5, relief=RAISED)
+discard_frame.place(relx=.025, rely=.62, relwidth=.6, relheight=.0825, anchor=NW)
+
+discard_0 = Label(discard_frame, text="", width=7, font=comic_sans_20, bg='gray71')
+discard_0.place(relx=.1, rely=.5, relwidth=.2, relheight=.98, anchor=CENTER)
+
+discard_1 = Label(discard_frame, text="", width=7, font=comic_sans_20, bg='gray71')
+discard_1.place(relx=.3, rely=.5, relwidth=.2, relheight=.98, anchor=CENTER)
+
+discard_2 = Label(discard_frame, text="", width=7, font=comic_sans_20, bg='gray71')
+discard_2.place(relx=.5, rely=.5, relwidth=.2, relheight=.98, anchor=CENTER)
+
+discard_3 = Label(discard_frame, text="", width=7, font=comic_sans_20, bg='gray71')
+discard_3.place(relx=.7, rely=.5, relwidth=.2, relheight=.98, anchor=CENTER)
+
+discard_4 = Label(discard_frame, text="", width=7, font=comic_sans_20, bg='gray71')
+discard_4.place(relx=.9, rely=.5, relwidth=.2, relheight=.98, anchor=CENTER)
+
+
 feedback_frame = LabelFrame(font=comic_sans_20, bg='gray71', bd=5, relief=RAISED)
-feedback_frame.place(relx=.025, rely=.635, relwidth=.6, relheight=.165, anchor=NW)
+feedback_frame.place(relx=.025, rely=.7175, relwidth=.6, relheight=.0825, anchor=NW)
 
 feedback_text = Label(feedback_frame, text=f"^Click on your choice.^", bg='gray71', anchor='center', width=10,
                       font=comic_sans_20)
@@ -212,26 +218,26 @@ calculate_button.place(relx=.5, rely=0, relwidth=1.0, relheight=.95, anchor=N)
 # ---------------------------------CARD BUTTONS AND CHOICES-----------------------------------------------------
 
 def choice_made(the_choice):
-    global discard_card_0
-    global discard_card_1
-    global discard_card_2
-    global discard_card_3
-    global discard_card_4
     if the_choice == "A":
         feedback_text.__setitem__("text", "Discarding " + card_0["text"])
-        discard_card_0 = True
+        discards[0] = True
+        discard_0.config(text="Discard")
     elif the_choice == "B":
         feedback_text.__setitem__("text", "Discarding " + card_1["text"])
-        discard_card_1 = True
+        discards[1] = True
+        discard_1.config(text="Discard")
     elif the_choice == "C":
         feedback_text.__setitem__("text", "Discarding " + card_2["text"])
-        discard_card_2 = True
+        discards[2] = True
+        discard_2.config(text="Discard")
     elif the_choice == "D":
         feedback_text.__setitem__("text", "Discarding " + card_3["text"])
-        discard_card_3 = True
+        discards[3] = True
+        discard_3.config(text="Discard")
     elif the_choice == "E":
         feedback_text.__setitem__("text", "Discarding " + card_4["text"])
-        discard_card_4 = True
+        discards[4] = True
+        discard_4.config(text="Discard")
 
 
 def update_sccore_sheet():
